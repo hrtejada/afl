@@ -1,3 +1,9 @@
+##AFL Windows Compatible
+Distribution of American Fuzzy Lop that can be used in a virtual or container environment with a shared host. Allows us to write to a shared Windows folder or mounted Windows volume.
+
+##Instructions to use with Docker Container
+Will come soon.
+
 ==================
 american fuzzy lop
 ==================
