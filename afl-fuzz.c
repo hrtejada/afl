@@ -2950,7 +2950,7 @@ static void pivot_inputs(void) {
        This is valuable for resuming fuzzing runs. */
 
 #ifndef SIMPLE_FILES
-#  define CASE_PREFIX "id:"
+#  define CASE_PREFIX "id_"
 #else
 #  define CASE_PREFIX "id_"
 #endif /* ^!SIMPLE_FILES */
@@ -2986,10 +2986,10 @@ static void pivot_inputs(void) {
 
 #ifndef SIMPLE_FILES
 
-      u8* use_name = strstr(rsl, ",orig:");
+      u8* use_name = strstr(rsl, ",orig_");
 
       if (use_name) use_name += 6; else use_name = rsl;
-      nfn = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir, id, use_name);
+      nfn = alloc_printf("%s/queue/id_%06u,orig_%s", out_dir, id, use_name);
 
 #else
 
@@ -3030,27 +3030,27 @@ static u8* describe_op(u8 hnb) {
 
   if (syncing_party) {
 
-    sprintf(ret, "sync:%s,src:%06u", syncing_party, syncing_case);
+    sprintf(ret, "sync_%s,src_%06u", syncing_party, syncing_case);
 
   } else {
 
-    sprintf(ret, "src:%06u", current_entry);
+    sprintf(ret, "src_%06u", current_entry);
 
     if (splicing_with >= 0)
       sprintf(ret + strlen(ret), "+%06u", splicing_with);
 
-    sprintf(ret + strlen(ret), ",op:%s", stage_short);
+    sprintf(ret + strlen(ret), ",op_%s", stage_short);
 
     if (stage_cur_byte >= 0) {
 
-      sprintf(ret + strlen(ret), ",pos:%u", stage_cur_byte);
+      sprintf(ret + strlen(ret), ",pos_%u", stage_cur_byte);
 
       if (stage_val_type != STAGE_VAL_NONE)
-        sprintf(ret + strlen(ret), ",val:%s%+d", 
-                (stage_val_type == STAGE_VAL_BE) ? "be:" : "",
+        sprintf(ret + strlen(ret), ",val_%s%+d", 
+                (stage_val_type == STAGE_VAL_BE) ? "be_" : "",
                 stage_cur_val);
 
-    } else sprintf(ret + strlen(ret), ",rep:%u", stage_cur_val);
+    } else sprintf(ret + strlen(ret), ",rep_%u", stage_cur_val);
 
   }
 
@@ -3133,7 +3133,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+    fn = alloc_printf("%s/queue/id_%06u,%s", out_dir, queued_paths,
                       describe_op(hnb));
 
 #else
@@ -3217,7 +3217,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+      fn = alloc_printf("%s/hangs/id_%06llu,%s", out_dir,
                         unique_hangs, describe_op(0));
 
 #else
@@ -3261,7 +3261,7 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+      fn = alloc_printf("%s/crashes/id_%06llu,sig:%02u,%s", out_dir,
                         unique_crashes, kill_signal, describe_op(0));
 
 #else
