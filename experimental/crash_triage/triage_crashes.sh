@@ -78,7 +78,7 @@ fi
 
 echo
 
-for crash in $DIR/crashes/id:*; do
+for crash in $DIR/crashes/id_*; do
 
   id=`basename -- "$crash" | cut -d, -f1 | cut -d: -f2`
   sig=`basename -- "$crash" | cut -d, -f2 | cut -d: -f2`
