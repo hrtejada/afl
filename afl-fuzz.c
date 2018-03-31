@@ -3261,7 +3261,7 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/crashes/id_%06llu,sig:%02u,%s", out_dir,
+      fn = alloc_printf("%s/crashes/id_%06llu,sig_%02u,%s", out_dir,
                         unique_crashes, kill_signal, describe_op(0));
 
 #else
